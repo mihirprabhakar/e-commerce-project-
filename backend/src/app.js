@@ -10,7 +10,7 @@ app.use("/api/products", productRoutes);
 
 // check health
 app.get("/health", (req, res) => {
-  res.json({ success: true, message: "Server is running" });
+  res.json({ success: true, message: "Server is running correctly" });
 });
 
 module.exports = app;
