@@ -12,6 +12,7 @@ exports.createCategory=(req,res)=>{
     });
 };
 
+
 exports.updateCategory=(req,res)=>{
     res.json({
         success:true,
