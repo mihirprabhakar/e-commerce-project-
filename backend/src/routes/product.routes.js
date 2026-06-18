@@ -12,13 +12,15 @@ router.get("/:id",productController.getProductById);
 // @POST create product 
 router.post("/",productController.createProduct);
 
+// @post bulk insert products
+router.post("/bulk-insert",productController.bulkInsertProducts);
+
 // @PUT update product 
 router.put("/:id",productController.updateProduct);
 
 // @Delete delete the product
 router.delete("/:id",productController.deleteProduct);
 
-// @post bulk insert products
-router.post("/bulk-insert",productController.bulkInsertProducts);
+
 
 module.exports = router;
