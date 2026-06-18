@@ -1,7 +1,11 @@
 const express = require("express");
-const productController = require("../controllers/product.controller");
-
 const router = express.Router();
+const productController = require("../controllers/product.controller");
+const authMiddleware = require("../middlewares/auth.middleware");
+const allowRoles = require("../middlewares/role.middleware");
+
+
+
 
 // @GET all products
 router.get("/",productController.getAllProducts);
@@ -9,17 +13,20 @@ router.get("/",productController.getAllProducts);
 // @GET product by id
 router.get("/:id",productController.getProductById);
 
+
+// admin protected route
+
 // @POST create product 
-router.post("/",productController.createProduct);
+router.post("/",authMiddleware, allowRoles("admin"),productController.createProduct);
 
 // @post bulk insert products
-router.post("/bulk-insert",productController.bulkInsertProducts);
+router.post("/bulk-insert",authMiddleware, allowRoles("admin"),productController.bulkInsertProducts);
 
 // @PUT update product 
-router.put("/:id",productController.updateProduct);
+router.put("/:id",authMiddleware, allowRoles("admin"),productController.updateProduct);
 
 // @Delete delete the product
-router.delete("/:id",productController.deleteProduct);
+router.delete("/:id",authMiddleware, allowRoles("admin"),productController.deleteProduct);
 
 
 

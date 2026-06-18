@@ -8,13 +8,15 @@ exports.getAllUsers=(req,res)=>{
 exports.getUserById=(req,res)=>{
     res.json({
         success: true,
-        message:"User by id Route is working"
+        message:"User by id Route is working",
+        userId: req.params.id
     });
 };
 
 exports.updateUser=(req,res)=>{
     res.json({
         success: true,
-        message:"Update User Route is working"
+        message:"Update User Route is working",
+        userId: req.params.id
     });
 };
