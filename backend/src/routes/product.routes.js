@@ -3,6 +3,7 @@ const router = express.Router();
 const productController = require("../controllers/product.controller");
 const authMiddleware = require("../middlewares/auth.middleware");
 const allowRoles = require("../middlewares/role.middleware");
+const upload=require("../middlewares/upload.middleware");
 
 
 
@@ -17,7 +18,7 @@ router.get("/:id",productController.getProductById);
 // admin protected route
 
 // @POST create product 
-router.post("/",authMiddleware, allowRoles("admin"),productController.createProduct);
+router.post("/",authMiddleware, allowRoles("admin"),upload.single("image"),productController.createProduct);
 
 // @post bulk insert products
 router.post("/bulk-insert",authMiddleware, allowRoles("admin"),productController.bulkInsertProducts);

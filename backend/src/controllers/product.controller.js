@@ -17,10 +17,17 @@ const Product = require("../models/product.model");
   });
 };
 
-exports.createProduct=(req,res)=>{
+exports.createProduct = (req, res) => {
+  console.log(req.file);
   res.json({
     success: true,
-    message:"Create Product Route is working"
+    message: "Create Product Route is working",
+    body: req.body,
+    fileReceived: req.file ? {
+      originalname: req.file.originalname,
+      mimetype: req.file.mimetype,
+      size: req.file.size
+    } : "No file uploaded"
   });
 };
 
