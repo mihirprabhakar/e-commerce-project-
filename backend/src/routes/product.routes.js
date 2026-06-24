@@ -18,16 +18,16 @@ router.get("/:id",productController.getProductById);
 // admin protected route
 
 // @POST create product 
-router.post("/",authMiddleware, allowRoles("admin"),upload.single("image"),productController.createProduct);
+router.post("/",authMiddleware, allowRoles("admin", "vendor"),upload.single("image"),productController.createProduct);
 
 // @post bulk insert products
-router.post("/bulk-insert",authMiddleware, allowRoles("admin"),productController.bulkInsertProducts);
+router.post("/bulk-insert",authMiddleware, allowRoles("admin", "vendor"),productController.bulkInsertProducts);
 
 // @PUT update product 
-router.put("/:id",authMiddleware, allowRoles("admin"),productController.updateProduct);
+router.put("/:id",authMiddleware, allowRoles("admin", "vendor"),productController.updateProduct);
 
 // @Delete delete the product
-router.delete("/:id",authMiddleware, allowRoles("admin"),productController.deleteProduct);
+router.delete("/:id",authMiddleware, allowRoles("admin", "vendor"),productController.deleteProduct);
 
 
 

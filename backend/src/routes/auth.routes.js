@@ -12,4 +12,7 @@ router.post("/login",authController.login);
 //@ Get /api/auth/profile
 router.get("/profile",authMiddleware,authController.profile);
 
+//@ post /api/auth/logout
+router.post("/logout", authMiddleware, authController.logout);
+
 module.exports=router;

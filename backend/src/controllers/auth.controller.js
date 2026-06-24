@@ -1,6 +1,7 @@
 const User = require("../models/user.model");
 const { generateToken } = require("../utils/generateToken");
 
+// @POST /api/auth/register
 exports.register = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
@@ -31,6 +32,7 @@ exports.register = async (req, res) => {
   }
 };
 
+// @POST /api/auth/login
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -46,16 +48,14 @@ exports.login = async (req, res) => {
 
     const token = generateToken(user);
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: "Login successful",
       data: {
-        user: {
-          id: user._id,
-          name: user.name,
-          email: user.email,
-          role: user.role
-        },
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
         token: token
       }
     });
@@ -64,10 +64,23 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.profile = (req, res) => {
-  res.json({
+// @GET /api/auth/profile
+exports.profile = async (req, res) => {
+  try {
+    res.status(200).json({
+      success: true,
+      message: "Profile fetched successfully",
+      data: req.user
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// @POST /api/auth/logout
+exports.logout = (req, res) => {
+  res.status(200).json({
     success: true,
-    message: "Profile route is working",
-    data: req.user
+    message: "Logged out successfully"
   });
 };
