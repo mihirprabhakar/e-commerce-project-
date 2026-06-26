@@ -5,6 +5,7 @@ const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 const isValidMobile = (mobile) => /^[6-9][0-9]{9}$/.test(mobile);
 const isValidGST = (gst) => /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/.test(gst);
 const isValidPincode = (pin) => /^[1-9][0-9]{5}$/.test(pin);
+const isValidPassword = (password) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password);
 
 // @POST /api/users/register
 exports.registerUser = async (req, res) => {
@@ -37,6 +38,9 @@ exports.registerUser = async (req, res) => {
     }
     if (pincode && !isValidPincode(pincode.trim())) {
       return res.status(400).json({ success: false, message: "Invalid pincode. Must be 6 digits" });
+    }
+    if (!isValidPassword(password)) {
+      return res.status(400).json({ success: false, message: "Password must be at least 8 characters long and include an uppercase letter, lowercase letter, number, and special character." });
     }
 
     // Duplicate checks
