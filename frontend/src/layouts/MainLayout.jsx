@@ -1,18 +1,20 @@
+import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import PageWrapper from "./PageWrapper";
 
-function MainLayout({ children }) {
+function MainLayout() {
   return (
     <>
       <Header />
       <Navbar />
       <PageWrapper>
-        {children}
+        <Outlet />
       </PageWrapper>
       <Footer />
     </>
   );
 }
+
 export default MainLayout;

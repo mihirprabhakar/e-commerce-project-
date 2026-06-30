@@ -1,0 +1,27 @@
+.top-header {
+    background-color: var(--color-primary-dark);
+    color: var(--color-white);
+    padding: 6px 0;
+  }
+  
+  .top-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-xs);
+  }
+  
+  .top-header-links {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+  
+  .top-header-links a {
+    color: var(--color-white);
+    opacity: 0.9;
+  }
+  
+  .top-header-links a:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }

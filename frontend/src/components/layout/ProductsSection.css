@@ -1,0 +1,29 @@
+.section-header a,
+.section-header a:hover {
+  text-decoration: none;
+}
+
+.section-header a:hover {
+  text-decoration: underline;
+}
+.products-section {
+    margin: var(--spacing-2xl) 0;
+  }
+  
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--spacing-lg);
+  }
+  
+  @media (max-width: 1024px) {
+    .products-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .products-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
