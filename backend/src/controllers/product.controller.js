@@ -8,10 +8,50 @@ const generateSlug = (name) => {
 // @GET /api/products
 exports.getAllProducts = async (req, res) => {
   try {
-    const products = await Product.find({ isActive: true })
+    // console.log(req.query);
+    const page=parseInt(req.query.page)||1;
+    const limit=parseInt(req.query.limit)||8;
+    const search=req.query.search||"";
+    const sortBy=req.query.sortBy||"createdAt";
+    const sortOrder=req.query.sortOrder||"desc";
+
+    const query={ isActive: true };
+    //only active components listed
+    // console.log(search);
+    // console.log(typeof search);
+    if(search){
+      query.name={$regex:search,$options:"i"};
+      // find the 
+    }
+
+    const sort={};
+    sort[sortBy]=sortOrder==="asc"?1:-1;
+
+  // total products tomskip page with index 1
+    const skip=(page-1)*limit;
+//total products
+    const total=await Product.countDocuments(query);
+    // only active ones
+
+    const products = await Product.find(query)
       .populate("categoryId", "name slug")
-      .populate("vendorId", "name email");
-    res.status(200).json({ success: true, message: "Products fetched successfully", data: products });
+      .populate("vendorId", "name email")
+      .sort(sort)
+      .skip(skip)
+      .limit(limit);
+    // console.log(products);
+
+    res.status(200).json({
+      success: true,
+      message: "products fetched successfully",
+      data: products,
+      pagination: {
+        total,
+        page,
+        limit,
+        totalPages:Math.ceil(total/limit)
+      }
+    });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
