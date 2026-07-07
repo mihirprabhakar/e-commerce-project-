@@ -8,6 +8,7 @@ const categoryRoutes=require("./category.routes");
 const cartRoutes=require("./cart.routes");
 const orderRoutes=require("./order.routes");
 const aboutRoutes = require("./about.routes");
+const contactRoutes = require("./contact.routes");
 
 
 router.use("/auth",authRoutes);
@@ -18,4 +19,5 @@ router.use("/categories",categoryRoutes);
 router.use("/cart",cartRoutes);
 router.use("/orders",orderRoutes);
 router.use("/about", aboutRoutes);
+router.use("/contact", contactRoutes);
 module.exports=router;
