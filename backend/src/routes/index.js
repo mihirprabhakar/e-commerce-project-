@@ -7,8 +7,9 @@ const dashboardRoutes=require("./dashboard.routes");
 const categoryRoutes=require("./category.routes");
 const cartRoutes=require("./cart.routes");
 const orderRoutes=require("./order.routes");
-const aboutRoutes = require("./about.routes");
-const contactRoutes = require("./contact.routes");
+const aboutRoutes=require("./about.routes");
+const contactRoutes=require("./contact.routes");
+const termsRoutes=require("./terms.routes");
 
 
 router.use("/auth",authRoutes);
@@ -20,4 +21,5 @@ router.use("/cart",cartRoutes);
 router.use("/orders",orderRoutes);
 router.use("/about", aboutRoutes);
 router.use("/contact", contactRoutes);
+router.use("/terms", termsRoutes);
 module.exports=router;
