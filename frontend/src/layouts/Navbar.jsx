@@ -14,17 +14,17 @@ function Navbar() {
 
           <div className="navbar-links">
             <Link to="/login" className="navbar-icon-link">
-              <span>👤</span>
+              <span><i className="fa-solid fa-user"></i></span>
               <span>Login</span>
             </Link>
             <Link to="/wishlist" className="navbar-icon-link">
-              <span>♡</span>
+              <span><i className="fa-solid fa-heart"></i></span>
               <span>Wishlist</span>
             </Link>
             <Link to="/cart" className="navbar-icon-link">
-              <span>🛒</span>
+              <span><i className="fa-solid fa-cart-shopping"></i></span>
               <span>Cart</span>
-              <span className="cart-badge">0</span>
+              {/* <span className="cart-badge">0</span> */}
             </Link>
           </div>
         </div>

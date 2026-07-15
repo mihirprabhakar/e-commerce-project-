@@ -1,23 +1,20 @@
-const express=require("express");
-const orderController=require("../controllers/order.controller");
-const authMiddleware=require("../middlewares/auth.middleware");
-const allowRoles=require("../middlewares/role.middleware");
-const router=express.Router();
+const express = require("express");
+const router = express.Router();
+const orderController = require("../controllers/order.controller");
+const authMiddleware = require("../middlewares/auth.middleware");
+const allowRoles = require("../middlewares/role.middleware");
 
+// customeer routes
+// place an order
+router.post("/place", authMiddleware, orderController.placeOrder);
+// gte all the orders
+router.get("/my-orders", authMiddleware, orderController.getMyOrders);
+// get by id 
+router.get("/:id", authMiddleware, orderController.getOrderById);
+// cancel the order
+router.patch("/:id/cancel", authMiddleware, orderController.cancelOrder);
 
-// @post create order
-router.post("/",authMiddleware,orderController.createOrder);
-
-// @get get my orders 
-router.get("/my-orders",authMiddleware,orderController.getMyOrders);
-
-//@get admin get all orders
-router.get("/",authMiddleware,allowRoles("admin"),orderController.getAllOrders);
-
-//@patch admin update order status
-router.patch("/:id/status",authMiddleware,allowRoles("admin"),orderController.updateOrderStatus);
-
-
-
+// admin route
+router.patch("/:id/status",authMiddleware,allowRoles("admin"), orderController.updateOrderStatus);
 
 module.exports=router;

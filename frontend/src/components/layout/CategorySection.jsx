@@ -49,7 +49,7 @@ function CategorySection() {
               key={category._id}
               className="category-card"
             >
-              <div className="category-icon">🏷️</div>
+              <div className="category-icon"><i className="fa-solid fa-tag"></i></div>
               <div className="category-name">{category.name}</div>
             </Link>
           ))}

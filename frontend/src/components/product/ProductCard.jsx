@@ -8,7 +8,7 @@ function ProductCard({ product }) {
 
   return (
     <Link to={`/products/${product._id}`} className="product-card">
-      <div className="product-image">📦</div>
+      <div className="product-image"><i className="fa-solid fa-box"></i></div>
       <div className="product-info">
         <div className="product-name">{product.name}</div>
         <div className="product-price-row">

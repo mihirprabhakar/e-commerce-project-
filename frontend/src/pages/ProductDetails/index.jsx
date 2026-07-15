@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import cartService from "../../services/cart.service";
 import productService from "../../services/product.service";
 import "./ProductDetails.css";
 
@@ -46,14 +47,35 @@ function ProductDetails() {
     return `₹${Number(price).toLocaleString("en-IN")}`;
   };
 
-  const addToCart = () => {
-    if (addedCart) {
-      setCartMessage("removed");
-    } else {
+  const addToCart = async () => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    navigate("/login");
+    return;
+  }
+
+  try {
+    const response = await cartService.addToCart(product._id, 1);
+    if (response.success) {
       setCartMessage("added");
+      setAddedCart(true);
     }
-    setAddedCart(!addedCart);
-  };
+  } catch (err) {
+    setCartMessage("error");
+    alert(err.response?.data?.message || "Failed to add to cart");
+  }
+};
+const removeFromCart = async () => {
+  try {
+    const response = await cartService.removeFromCart(product._id);
+    if (response.success) {
+      setCartMessage("removed");
+      setAddedCart(false);
+    }
+  } catch (err) {
+    alert("Failed to remove from cart");
+  }
+};
 
   // loading state
   if(loading){
@@ -92,7 +114,7 @@ function ProductDetails() {
         <div className="product-details-card">
         {/* prod img */}
         <div className="product-details-image">
-            📦
+            <i className="fa-solid fa-box"></i>
         </div>
 
         {/* prod info */}
@@ -186,9 +208,9 @@ function ProductDetails() {
               <button
                 className={`btn-add-cart ${addedCart ? "btn-remove-cart" : ""}`}
                 disabled={product.stock === 0}
-                onClick={addToCart}
+                onClick={addedCart ? removeFromCart : addToCart}
               >
-                {product.stock === 0 ? "Out of Stock" :addedCart?"Remove from cart": "Add to Cart"}
+                {product.stock === 0 ? "Out of Stock" : addedCart ? "Remove from Cart" : "Add to Cart"}
               </button>
               <button className="btn-wishlist"><i className="fa-solid fa-heart"></i>Wishlist</button>
             </div>
