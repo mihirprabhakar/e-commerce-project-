@@ -13,10 +13,7 @@ function Cart() {
 
   // Fetch cart on page load
   useEffect(() => {
-    fetchCart();
-  }, []);
-
-  const fetchCart = async () => {
+    const fetchCart = async () => {
     setLoading(true);
     try {
       const response = await cartService.getCart();
@@ -33,6 +30,26 @@ function Cart() {
       setLoading(false);
     }
   };
+    fetchCart();
+  }, []);
+
+  // const fetchCart = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const response = await cartService.getCart();
+  //     if (response.success) {
+  //       setCart(response.data);
+  //     }
+  //   } catch (err) {
+  //     if (err.response?.status === 401) {
+  //       navigate("/login");
+  //     } else {
+  //       setError("Failed to load cart. Please try again.");
+  //     }
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   // Handle quantity update
   const handleQuantityUpdate = async (productId, newQuantity) => {
