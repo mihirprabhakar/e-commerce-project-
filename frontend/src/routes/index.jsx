@@ -19,6 +19,7 @@ import Privacy from "../pages/Privacy";
 import Terms from "../pages/Terms";
 import NotFound from "../pages/NotFound";
 import Error from "../pages/Error";
+import OrderDetails from "../pages/OrderDetails";
 
 function AppRoutes() {
   return (
@@ -40,6 +41,8 @@ function AppRoutes() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/orders/:id" element={<OrderDetails />} />
         </Route>
 
         {/* Routes WITHOUT header, navbar and footer */}
